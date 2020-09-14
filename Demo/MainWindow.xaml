@@ -12,7 +12,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Height="800"
-        Width="1100">
+        Width="1100" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*" />
@@ -51,7 +51,8 @@
                              HorizontalAlignment="Left"
                              Margin="10 5"
                              Width="50"
-                             Height="50">
+                             Height="50" >
+                       
                         <Ellipse.Fill>
                             <ImageBrush  ImageSource="Images/github.png" />
                         </Ellipse.Fill>
@@ -205,13 +206,16 @@
                           Cursor="Hand"
                           Name="FriendList"
                           ItemsSource="{Binding Friends}">
-                    
-                    <i:Interaction.Triggers>
+                    <!-->
+                    如果不存在则创建一个command命令
+                    <-->
+                        <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SelectItemChangedCommand}"
                                                    CommandParameter="{Binding ElementName=FriendList}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                    
                     
 
                     <ListView.ItemTemplate>
@@ -231,7 +235,7 @@
                                             Margin="5 0">
                                     <TextBlock FontSize="15"
                                                Foreground="Black"
-                                               Text="{Binding Nickname}" />
+                                               Text="{Binding Nickname}"/>
                                     <TextBlock Margin="0 2 0 0"
                                                FontSize="12"
                                                Text="这家伙很懒,什么也没留下" />
@@ -259,8 +263,17 @@
                                          ToolTip="TIM QQ"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Bottom"
-                                         Margin="10 20">
-
+                                         Margin="10 20"
+                                        
+                                     >
+                    <StackPanel Width="100">
+                        <Button Content="添加" Command="{Binding AddCommand}" >
+                        </Button>
+                        <Button Content="查找">
+                        </Button>
+                        <Button Content="设置">
+                        </Button>
+                    </StackPanel>
                 </materialDesign:PopupBox>
             </Grid>
             <Grid Grid.Column="1">
@@ -285,6 +298,7 @@
                                 
                                     BorderBrush="{x:Null}"
                                     ToolTip="发送消息">
+
                                 <Viewbox Width="24"
                                          Height="24">
                                     <Canvas Width="24"
@@ -305,9 +319,12 @@
                                             Margin="80 5 0 0 "
                                             
                                             >
+                                
                                     <TextBlock Text="账号  "
                                                Foreground="#B7B7B7" />
-                                    <TextBlock Text="vaemc520@qq.com" />
+                                    <TextBlock Text="vaemc520@qq.com">
+                            
+                                    </TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"
                                             Margin="80 5 0 0 ">

@@ -1,4 +1,5 @@
 ﻿using Demo.ViewModes;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Demo
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
+    [AddINotifyPropertyChangedInterface]
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -31,5 +33,7 @@ namespace Demo
         {
             DragMove();
         }
+
+    
     }
 }
