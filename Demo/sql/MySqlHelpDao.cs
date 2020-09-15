@@ -15,17 +15,21 @@ namespace Demo.sql
         public static int ExecuteNonQuery(string sql,params MySqlParameter[] parameters)
         {
             int val = 0;
+            MySqlTransaction sqlTransaction = null;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(ConnctionString))
                 {
                     con.Open();
+                    //开启事务
+                    sqlTransaction = con.BeginTransaction();
                     MySqlCommand mySqlCommand = new MySqlCommand(sql,con);
                     foreach(var item in parameters)
                     {
                         mySqlCommand.Parameters.Add(item);
                     }
                     val = mySqlCommand.ExecuteNonQuery();
+                    sqlTransaction.Commit();
                     con.Close();
                    
                 }
@@ -33,6 +37,10 @@ namespace Demo.sql
             }
             catch(Exception e)
             {
+                //事务回滚
+                sqlTransaction.Rollback();
+                //事务提交
+                sqlTransaction.Commit();
 
             }
             return val;
