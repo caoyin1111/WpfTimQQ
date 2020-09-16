@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Demo.Logs;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ namespace Demo.sql
 {
     public class MySqlHelpDao
     {
-        
+        public static Log log = new Log("启动层级日志");
         public static string ConnctionString = "server=127.0.0.1;port=3306;user=root;password=1995107;database=qqfriend;Allow User Variables=True";
         public static int ExecuteNonQuery(string sql,params MySqlParameter[] parameters)
         {
@@ -37,6 +38,7 @@ namespace Demo.sql
             }
             catch(Exception e)
             {
+                log.error(e.Message);
                 //事务回滚
                 sqlTransaction.Rollback();
                 //事务提交

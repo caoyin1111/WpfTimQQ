@@ -29,10 +29,10 @@ namespace Demo.Expends
         /// <param name="obj">属性所属的对象</param>
         /// <param name="propertyName">属性名称</param>
         /// <param name="value">属性需要被赋值的值</param>
-        //public static void SetObjectPropertyValue(this object obj, string propertyName, object value)
-        //{
-        //    obj.GetType().GetProperty(propertyName).SetValue(obj, value);
-        //}
+        public static void SetObjectPropertyValue(this object obj, string propertyName, object value)
+        {
+            obj.GetType().GetProperty(propertyName).SetValue(obj, value);
+        }
         /// <summary>
         /// 获取属性的值
         /// </summary>
@@ -40,10 +40,10 @@ namespace Demo.Expends
         /// <param name="obj"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        //public static T GetObjectPropertyValue<T>(this object obj, string propertyName)
-        //{
-        //    return (T)obj.GetType().GetProperty(propertyName).GetValue(obj);
-        //}
+        public static T GetObjectPropertyValue<T>(this object obj, string propertyName)
+        {
+            return (T)obj.GetType().GetProperty(propertyName).GetValue(obj);
+        }
 
         /// <summary>
         /// 清空队列
