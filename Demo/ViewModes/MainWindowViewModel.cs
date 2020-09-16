@@ -69,14 +69,14 @@ namespace Demo.ViewModes
 
             //}
             FriendServer friendServer = new FriendServer();
-            friends = new ObservableCollection<Friend>();
-            friends.Add(new Friend() { Nickname = "Go to hell", Head = Properties.Resources.head1 });
-            friends.Add(new Friend() { Nickname = "糖宝", Head = Properties.Resources.head2 });
-            friends.Add(new Friend() { Nickname = "胖虎", Head = Properties.Resources.head3 });
-            friends.Add(new Friend() { Nickname = "小花", Head = Properties.Resources.head4 });
-            friends.Add(new Friend() { Nickname = "隔壁老王", Head = Properties.Resources.head5 });
-            friends.Add(new Friend() { Nickname = "狗子", Head = Properties.Resources.head6 });
-            foreach (var item in friends)
+            Friends = new ObservableCollection<Friend>();
+            Friends.Add(new Friend() { Nickname = "Go to hell", Head = Properties.Resources.head1 });
+            Friends.Add(new Friend() { Nickname = "糖宝", Head = Properties.Resources.head2 });
+            Friends.Add(new Friend() { Nickname = "胖虎", Head = Properties.Resources.head3 });
+            Friends.Add(new Friend() { Nickname = "小花", Head = Properties.Resources.head4 });
+            Friends.Add(new Friend() { Nickname = "隔壁老王", Head = Properties.Resources.head5 });
+            Friends.Add(new Friend() { Nickname = "狗子", Head = Properties.Resources.head6 });
+            foreach (var item in Friends)
             {
                 friendServer.Add(item);
             }
@@ -88,6 +88,13 @@ namespace Demo.ViewModes
             //friends.Add(new Friend() { Nickname = "隔壁老王", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head5.jpg")) });
             //friends.Add(new Friend() { Nickname = "狗子", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head6.jpg")) });
             DataTable table = friendServer.GetTable();
+            Friends.Clear();
+            foreach(DataRow item in table.Rows)
+            {
+                MemoryStream memory = new MemoryStream((byte[])item["Head"]);
+                Bitmap bitmap = (Bitmap)System.Drawing.Image.FromStream(memory);
+                Friends.Add(new Friend() { Nickname = item["Nickname"].ToString(), Head = bitmap });
+            }
             CloseCommand = new DelegateCommand(()=> {
 
                 Application.Current.Shutdown();
