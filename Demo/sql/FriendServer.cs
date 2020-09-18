@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Demo.sql
 {
@@ -31,14 +32,19 @@ namespace Demo.sql
 
             };
 
-                MemoryStream stream = new MemoryStream();
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    //BitmapSource 转换为字节流
+                    BitmapEncoder bitmapEncoder = new BmpBitmapEncoder();
+                    bitmapEncoder.Frames.Add(BitmapFrame.Create(friend.Head));
+                    bitmapEncoder.Save(stream);
+                    byte[] bt = stream.ToArray();
+                    parameters[0].Value = bt;
+                    parameters[1].Value = friend.Nickname;
+                }
 
-                friend.Head.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                byte[] bt = stream.ToArray();
-                parameters[0].Value = bt;
-                parameters[1].Value = friend.Nickname;
-                
-                obj = MySqlHelpDao.ExecuteNonQuery(strSql.ToString(),parameters);
+
+                obj = MySqlHelpDao.ExecuteNonQuery(strSql.ToString(), parameters);
             }
             catch (Exception e)
             {

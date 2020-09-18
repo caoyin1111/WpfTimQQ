@@ -205,7 +205,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           Cursor="Hand"
                           Name="FriendList"
-                          ItemsSource="{Binding Friends}">
+                          ItemsSource="{Binding friends}">
                     <!-->
                     如果不存在则创建一个command命令
                     <-->
@@ -288,7 +288,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <Image  Stretch="UniformToFill" Source="{Binding Head}" />
+                            <Image Stretch="UniformToFill" Source="{Binding friend.Head}" />
                         </Grid>
                         <Grid Grid.Row="1">
                             <Button  Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -311,7 +311,7 @@
                             </Button>
 
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Nickname}"
+                                <TextBlock Text="{Binding friend.Nickname}"
                                            HorizontalAlignment="Center"
                                            FontSize="35"
                                            Margin="0 20 0 0" />

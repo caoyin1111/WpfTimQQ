@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -31,14 +32,8 @@ namespace Demo.ViewModes
         public DelegateCommand CloseCommand { get; set; }
         public DelegateCommand AddCommand { get; set; }
         public AddWindow addWindow = null;
-        public ObservableCollection<Friend> friends;
-        public ObservableCollection<Friend> Friends
-        {
-            get { return friends; }
-            set { SetProperty(ref friends, value); }
-        }
-
-       
+        public ObservableCollection<Friend> friends { get; set; } = new ObservableCollection<Friend>();
+        public Friend friend { get; set; }
 
 
         public MainWindowViewModel()
@@ -68,18 +63,18 @@ namespace Demo.ViewModes
             //{
 
             //}
-            FriendServer friendServer = new FriendServer();
-            Friends = new ObservableCollection<Friend>();
-            Friends.Add(new Friend() { Nickname = "Go to hell", Head = Properties.Resources.head1 });
-            Friends.Add(new Friend() { Nickname = "糖宝", Head = Properties.Resources.head2 });
-            Friends.Add(new Friend() { Nickname = "胖虎", Head = Properties.Resources.head3 });
-            Friends.Add(new Friend() { Nickname = "小花", Head = Properties.Resources.head4 });
-            Friends.Add(new Friend() { Nickname = "隔壁老王", Head = Properties.Resources.head5 });
-            Friends.Add(new Friend() { Nickname = "狗子", Head = Properties.Resources.head6 });
-            foreach (var item in Friends)
-            {
-                friendServer.Add(item);
-            }
+            //FriendServer friendServer = new FriendServer();
+
+            //friends.Add(new Friend() { Nickname = "Go to hell", Head = Properties.Resources.head1 });
+            //friends.Add(new Friend() { Nickname = "糖宝", Head = Properties.Resources.head2 });
+            //friends.Add(new Friend() { Nickname = "胖虎", Head = Properties.Resources.head3 });
+            //friends.Add(new Friend() { Nickname = "小花", Head = Properties.Resources.head4 });
+            //friends.Add(new Friend() { Nickname = "隔壁老王", Head = Properties.Resources.head5 });
+            //friends.Add(new Friend() { Nickname = "狗子", Head = Properties.Resources.head6 });
+            //foreach (var item in friends)
+            //{
+            //    friendServer.Add(item);
+            //}
             //friends = new List<Friend>();
             //friends.Add(new Friend() { Nickname = "Go to hell", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head1.jpg")) });
             //friends.Add(new Friend() { Nickname = "糖宝", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head2.jpg")) });
@@ -87,13 +82,18 @@ namespace Demo.ViewModes
             //friends.Add(new Friend() { Nickname = "小花", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head4.jpg")) });
             //friends.Add(new Friend() { Nickname = "隔壁老王", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head5.jpg")) });
             //friends.Add(new Friend() { Nickname = "狗子", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head6.jpg")) });
+            FriendServer friendServer = new FriendServer();
             DataTable table = friendServer.GetTable();
-            Friends.Clear();
             foreach(DataRow item in table.Rows)
             {
-                MemoryStream memory = new MemoryStream((byte[])item["Head"]);
-                Bitmap bitmap = (Bitmap)System.Drawing.Image.FromStream(memory);
-                Friends.Add(new Friend() { Nickname = item["Nickname"].ToString(), Head = bitmap });
+                using (MemoryStream memory = new MemoryStream((byte[])item["Head"]))
+                {
+             
+                    Bitmap bitmap = (Bitmap)System.Drawing.Image.FromStream(memory); 
+                    BitmapSource source = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    friends.Add(new Friend() { Nickname = item["Nickname"].ToString(), Head = source });
+                }
+                    
             }
             CloseCommand = new DelegateCommand(()=> {
 
@@ -106,9 +106,10 @@ namespace Demo.ViewModes
               
 
                 ListView lv = p as ListView;
-                Friend friend = lv.SelectedItem as Friend;
-                Head= friend.Head;
-                Nickname = friend.Nickname;
+                friend = lv.SelectedItem as Friend;
+             
+                //Head= friend.Head;
+                //Nickname = friend.Nickname;
             });
             AddCommand = new DelegateCommand(() =>
             {
@@ -123,22 +124,7 @@ namespace Demo.ViewModes
                 MessageBox.Show("你好");
             });
         }
-        private Bitmap head;
-
-        public Bitmap Head
-        {
-            get { return head; }
-            set { SetProperty(ref head, value); }
-        }
-
-
-        private string nickname;
-        public string Nickname
-        {
-            get { return nickname; }
-            set { SetProperty(ref nickname, value); }
-        }
-
+       
 
     }
 }

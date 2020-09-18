@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace Demo.Items
 {
-    [AddINotifyPropertyChangedInterface]
+   
     public class Friend: BindableBase
     {
 
@@ -22,11 +22,11 @@ namespace Demo.Items
         //    get { return head; }
         //    set { SetProperty(ref head, value); }
         //}
-        private Bitmap head;
-        public Bitmap Head
+        private BitmapSource head;
+        public BitmapSource Head
         {
             get { return head; }
-            set { SetProperty(ref head, value); }
+            set { head = value; }
         }
 
 
@@ -34,13 +34,9 @@ namespace Demo.Items
         public string Nickname
         {
             get { return nickname; }
-            set { SetProperty(ref nickname, value); }
+            set { nickname = value; }
         }
 
-        public Friend()
-        {
-           
-
-        }
+       
     }
 }

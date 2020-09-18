@@ -1,14 +1,19 @@
 ﻿using Demo.Items;
+using Demo.sql;
 using Prism.Commands;
 using Prism.Mvvm;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
 namespace Demo.ViewModes
@@ -18,27 +23,24 @@ namespace Demo.ViewModes
     {
         public DelegateCommand CloseAddCommand { get; set; }
         public DelegateCommand ClickCommand { get; set; }
-        public ObservableCollection<Friend> friend2;
-        public ObservableCollection<Friend> Friend2
-        {
-            get { return friend2; }
-            set { SetProperty(ref friend2, value); }
-        }
+        public ObservableCollection<Friend> fri { get; set; } = new ObservableCollection<Friend>();
         public AddWindowViewModel()
         {
-            //friend2 = new ObservableCollection<Friend>();
-            //friends = new List<Friend>();
-            //friend2.Add(new Friend() { Nickname = "Go to hell", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head1.jpg")) });
-            //friend2.Add(new Friend() { Nickname = "糖宝", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head2.jpg")) });
-            //friend2.Add(new Friend() { Nickname = "胖虎", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head3.jpg")) });
-            //friend2.Add(new Friend() { Nickname = "小花", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head4.jpg")) });
-            //friend2.Add(new Friend() { Nickname = "隔壁老王", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head5.jpg")) });
-            //friend2.Add(new Friend() { Nickname = "狗子", Head = new BitmapImage(new Uri("pack://application:,,,/Images/head6.jpg")) });
-            //ClickCommand = new DelegateCommand(() =>
-            //{
-            //    MessageBox.Show("你好");
-            //});
+            FriendServer friendServer = new FriendServer();
+            DataTable table = friendServer.GetTable();
+            foreach (DataRow item in table.Rows)
+            {
+                using (MemoryStream memory = new MemoryStream((byte[])item["Head"]))
+                {
+
+                    Bitmap bitmap = (Bitmap)System.Drawing.Image.FromStream(memory);
+                    BitmapSource source = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    fri.Add(new Friend() { Nickname = item["Nickname"].ToString(), Head = source });
+                }
+
+            }
         }
     }
+    
     
 }

@@ -238,7 +238,7 @@
                             </i:Interaction.Triggers>
                 </TextBlock>
                 <ListBox Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                         ItemsSource="{Binding Friend2}">
+                         ItemsSource="{Binding fri}">
                    <ListBox.Template>
                     <ControlTemplate>
                         <WrapPanel IsItemsHost="True"></WrapPanel>
