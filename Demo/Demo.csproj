@@ -234,12 +234,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddUserControl.xaml.cs">
+      <DependentUpon>AddUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddWindow.xaml.cs">
       <DependentUpon>AddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Expends\Expends.cs" />
     <Compile Include="Items\Friend.cs" />
     <Compile Include="Items\LogType.cs" />
+    <Compile Include="ListBoxControl.xaml.cs">
+      <DependentUpon>ListBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logs\Log.cs" />
     <Compile Include="qqfriendDataSet.cs">
       <DependentUpon>qqfriendDataSet.xsd</DependentUpon>
@@ -253,7 +259,15 @@
     <Compile Include="sql\MySqlHelpDao.cs" />
     <Compile Include="ViewModes\AddWindowViewModel.cs" />
     <Compile Include="ViewModes\MainWindowViewModel.cs" />
+    <Page Include="AddUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

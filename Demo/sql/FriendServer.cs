@@ -78,5 +78,19 @@ namespace Demo.sql
             }
             return table;
         }
+        public DataTable GetData(string sqlwhere)
+        {
+            DataTable table = null;
+            try
+            {
+                string strSql = string.Format("select * from qqfriend.friend where Nickname = \'{0}\'", sqlwhere);
+                table = MySqlHelpDao.ExecuteDataSet(strSql.ToString()).Tables[0];
+            }
+            catch (Exception E)
+            {
+
+            }
+            return table;
+        }
     }
 }

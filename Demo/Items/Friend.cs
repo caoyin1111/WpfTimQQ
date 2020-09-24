@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace Demo.Items
 {
-   
+    [AddINotifyPropertyChangedInterface]
     public class Friend: BindableBase
     {
 
