@@ -269,7 +269,7 @@
                     <StackPanel Width="100">
                         <Button Content="添加" Command="{Binding AddCommand}" >
                         </Button>
-                        <Button Content="查找">
+                        <Button Content="截屏" Command="{Binding CaptureCommand}">
                         </Button>
                         <Button Content="设置">
                         </Button>
