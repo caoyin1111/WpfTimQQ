@@ -1,4 +1,5 @@
 ﻿using Demo.Logs;
+using Prism.Mvvm;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,9 @@ namespace Demo
     public partial class CaptureWindow : Window
     {
         Bitmap screenSnapshot { get; set; }
-        public System.Windows.Point FirstPoint = new System.Windows.Point();
-        public System.Windows.Point ForntPoint = new System.Windows.Point();
+        //一定要加get,set,这样才能绑定
+        public System.Windows.Point FirstPoint { get; set; } = new System.Windows.Point();
+        public System.Windows.Point ForntPoint { get; set; } = new System.Windows.Point();
         BitmapSource bSource;
         /// <summary>
         /// 最小移动距离

@@ -266,10 +266,14 @@
     <Compile Include="CaptureWindow.xaml.cs">
       <DependentUpon>CaptureWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CaptureWindow2.xaml.cs">
+      <DependentUpon>CaptureWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DrawingCanvas.cs" />
     <Compile Include="Expends\Expends.cs" />
     <Compile Include="Items\Friend.cs" />
     <Compile Include="Items\LogType.cs" />
+    <Compile Include="Items\Notify.cs" />
     <Compile Include="ListBoxControl.xaml.cs">
       <DependentUpon>ListBoxControl.xaml</DependentUpon>
     </Compile>
@@ -295,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CaptureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CaptureWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

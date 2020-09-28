@@ -271,6 +271,8 @@
                         </Button>
                         <Button Content="截屏" Command="{Binding CaptureCommand}">
                         </Button>
+                        <Button Content="截屏2" Command="{Binding CaptureCommand2}">
+                        </Button>
                         <Button Content="设置">
                         </Button>
                     </StackPanel>

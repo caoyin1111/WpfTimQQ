@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 
 namespace Demo.ViewModes
 {
+    //绑定两种方式，一是AddINotifyPropertyChangedInterface,二是自定义基类BindableBase
     [AddINotifyPropertyChangedInterface]
     public class MainWindowViewModel: BindableBase
     {

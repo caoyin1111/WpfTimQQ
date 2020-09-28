@@ -17,18 +17,31 @@
                                   Height="{Binding ActualHeight,ElementName=xxgrid}"
                                   Opacity="0.5" MouseDown="Canvas_MouseDown" MouseLeave="Canvas_MouseLeave" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp" MouseWheel="Canvas_Wheel"  
                                   />
-
-
-
         </Canvas>
 
         <Grid Grid.Row="1">
-            <Button Width="80" HorizontalAlignment="Left" Margin="10,5,5,0" Click="Capture_Click">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="80" HorizontalAlignment="Left" Click="Capture_Click">
                 截屏
             </Button>
-            <Button Width="80" Margin="95,12,615.6,6.4" Click="Refresh_Click" Height="Auto">
+            <Button Grid.Column="1" Width="80" HorizontalAlignment="Left" Click="Refresh_Click">
                 刷新
             </Button>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="8">
+                <TextBlock TextAlignment="Center" Text="{Binding FirstPoint.X,Mode=TwoWay}" Width="80">
+                </TextBlock>
+                <TextBlock TextAlignment="Center" Text="{Binding FirstPoint.Y,Mode=TwoWay}" Width="80">
+                </TextBlock>
+                <TextBlock TextAlignment="Center" Text="{Binding ForntPoint.X,Mode=TwoWay}" Width="80">
+                </TextBlock>
+                <TextBlock TextAlignment="Center" Text="{Binding ForntPoint.Y,Mode=TwoWay}" Width="80">
+                </TextBlock>
+            </StackPanel>
+
         </Grid>
 
 

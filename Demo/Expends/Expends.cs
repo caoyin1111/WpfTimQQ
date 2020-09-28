@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -411,7 +412,7 @@ namespace Demo.Expends
         {
             return value.ToString(format).ToBaseType<double>();
         }
-
+        public static string ToPropertyName<T>(this Expression<T> expression) => (expression.Body as MemberExpression).Member.Name;
 
     }
 }
